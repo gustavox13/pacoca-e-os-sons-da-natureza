@@ -8,22 +8,29 @@ public class GameController : MonoBehaviour
     private GameObject[] animals = new GameObject[5];
     private Animator[] animations = new Animator[5];
     private AudioSource[] audios = new AudioSource[5];
-    private int currentAnimal;
-    
+
+    public int currentAnimal;
+
+    [SerializeField]
+    private GameObject EndScreen;
 
     private void Awake()
     {
         ShuffleAnimals();
         currentAnimal = 0;
+        GetAllComponents();
     }
 
 
     void Start()
     {
-        GetAllComponents();
-        AppearsAnimals();
+        StartCoroutine(WaitForFirstRound());
+    }
 
-        //audioteste.Play();
+    IEnumerator WaitForFirstRound()
+    {
+        yield return new WaitForSeconds(1); //TEMPO PARA INICIAR O TURNO
+        AppearsAnimals();
 
     }
 
@@ -53,13 +60,49 @@ public class GameController : MonoBehaviour
         {
             animations[i] = animals[i].gameObject.GetComponent<Animator>();
             audios[i] = animals[i].gameObject.GetComponent<AudioSource>();
+            animals[i].GetComponent<MyData>().MyId = i;
         }
 
     }
 
 
+
+
+    public void DesappearsAnimals()
+    {
+        for (int i = currentAnimal; i < (currentAnimal + 3); i++)
+        {
+            animations[i].SetTrigger("disappears");
+
+            animals[i].GetComponent<DisabledOrEnabledButton>().DisableButton();
+
+            if (i == 4)
+                break;
+        }
+
+
+        if (currentAnimal < 4)
+        {
+            currentAnimal++;
+            StartCoroutine(StartNewRound());
+        }
+        else
+        {
+            EndScreen.SetActive(true);
+        }
+
+    }
+
+
+    IEnumerator StartNewRound()
+    {
+        yield return new WaitForSeconds(3); //TEMPO PARA INICIAR NOVO TURNO
+        AppearsAnimals();
+
+    }
+
     //APARECE OS 3 PRIMEIROS ANIMAIS A PARTIR DO ANIMAL ATUAL
-    private void AppearsAnimals()
+    public void AppearsAnimals()
     {
         audios[currentAnimal].Play();
 
@@ -76,6 +119,10 @@ public class GameController : MonoBehaviour
         }
     }
 
-  
+
+    public void RepeatAudio()
+    {
+        audios[currentAnimal].Play();
+    }
 
 }

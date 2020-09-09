@@ -8,11 +8,6 @@ public class DisabledOrEnabledButton : MonoBehaviour
     [SerializeField]
     private Button myButton;
 
-    private void Start()
-    {
-        myButton.interactable = false;
-    }
-
     public void EnableButton()
     {
         myButton.interactable = true;
