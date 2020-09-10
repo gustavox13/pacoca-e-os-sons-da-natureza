@@ -32,11 +32,14 @@ public class LinkButtonId : MonoBehaviour
 
     public void Checkanswer()
     {
-        if(buttonId == GameController.GetComponent<GameController>().currentAnimal)
+        GameController.GetComponent<GameController>().QuantPlays++;
+
+
+        if(buttonId == GameController.GetComponent<GameController>().currentAnimal) //ACERTOU
         {
                 GameController.GetComponent<GameController>().DesappearsAnimals();  
         }
-        else
+        else // ERROU
         {
             StartCoroutine(Wronganswer());
         }

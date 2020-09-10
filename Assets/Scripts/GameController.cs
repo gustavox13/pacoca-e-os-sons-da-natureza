@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     private Animator[] animations = new Animator[5];
     private AudioSource[] audios = new AudioSource[5];
 
+    public int QuantPlays;
+
     public int currentAnimal;
 
     [SerializeField]
@@ -88,7 +90,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            EndScreen.SetActive(true);
+            EndScreen.SetActive(true); //GANHOU
+            Debug.Log(QuantPlays);
         }
 
     }
