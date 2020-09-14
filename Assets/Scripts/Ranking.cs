@@ -32,18 +32,18 @@ public class Ranking : MonoBehaviour
             
             star1.SetActive(true);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
 
             star2.SetActive(true);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
 
             star3.SetActive(true);
         } else if(score > 5  && score <= 9)
         {
             star1.SetActive(true);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
 
             star2.SetActive(true);
         }
