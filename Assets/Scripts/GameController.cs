@@ -48,11 +48,6 @@ public class GameController : MonoBehaviour
             animals[randomizeArray] = obj;
         }
 
-        /* //PRINT ARRAY
-        for (int i = 0; i < animals.Length; i++)
-        {
-            Debug.Log(animals[i].name);
-        }*/
     }
 
     //PROCURA E PEGA TODOS OS COMPONENTES DOS ANIMAIS ----------- 2
@@ -72,7 +67,9 @@ public class GameController : MonoBehaviour
 
     public void DesappearsAnimals()
     {
-        for (int i = currentAnimal; i < (currentAnimal + 3); i++)
+
+        //NOVO LOOP
+        for (int i = 0; i < animals.Length; i++)
         {
             animations[i].SetTrigger("disappears");
 
@@ -81,6 +78,16 @@ public class GameController : MonoBehaviour
             if (i == 4)
                 break;
         }
+        /*
+        for (int i = currentAnimal; i < (currentAnimal + 3); i++)
+        {
+            animations[i].SetTrigger("disappears");
+
+            animals[i].GetComponent<DisabledOrEnabledButton>().DisableButton();
+
+            if (i == 4)
+                break;
+        }*/
 
 
         if (currentAnimal < 4)
@@ -109,6 +116,18 @@ public class GameController : MonoBehaviour
     {
         audios[currentAnimal].Play();
 
+        //NOVO LOOP
+        for (int i = 0; i < animals.Length; i++)
+        {
+            Debug.Log(animals[i].name);
+
+            animations[i].SetTrigger("appears");
+
+            animals[i].GetComponent<DisabledOrEnabledButton>().EnableButton();
+
+        }
+
+        /*
         for (int i = currentAnimal; i < (currentAnimal + 3); i++)
         {
             Debug.Log(animals[i].name);
@@ -119,7 +138,7 @@ public class GameController : MonoBehaviour
 
             if (i == 4)
                 break;
-        }
+        }*/
     }
 
 
